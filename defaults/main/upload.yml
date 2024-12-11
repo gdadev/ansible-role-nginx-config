@@ -18,9 +18,11 @@ nginx_config_upload_html:
 nginx_config_upload_ssl_enable: false
 nginx_config_upload_ssl_crt:
   - src: ssl/certs/
+    # content: "" # You can optionally provide content of ssl crt, but 'src' parameter has higher priority and needs to be deleted in such case
     dest: /etc/ssl/certs
     backup: true
 nginx_config_upload_ssl_key:
   - src: ssl/private/
+    # content: "" # You can optionally provide content of ssl key, but 'src' parameter has higher priority and needs to be deleted in such case
     dest: /etc/ssl/private
     backup: true

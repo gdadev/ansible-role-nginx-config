@@ -49,7 +49,8 @@
 
     - name: Upload NGINX SSL certificates
       ansible.builtin.copy:
-        src: "{{ item['src'] }}"
+        src: "{{ item['src'] | default(omit) }}"
+        content: "{{ 'src' in item.keys() | ternary(omit, item['content']) }}"
         dest: "{{ item['dest'] | default('/etc/ssl/certs') }}"
         backup: "{{ item['backup'] | default(true) }}"
         mode: "0640"
@@ -58,7 +59,8 @@
 
     - name: Upload NGINX SSL keys
       ansible.builtin.copy:
-        src: "{{ item['src'] }}"
+        src: "{{ item['src'] | default(omit) }}"
+        content: "{{ 'src' in item.keys() | ternary(omit, item['content']) }}"
         dest: "{{ item['dest'] | default('/etc/ssl/private') }}"
         backup: "{{ item['backup'] | default(true) }}"
         mode: "0640"
